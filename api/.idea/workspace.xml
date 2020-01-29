@@ -2,17 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9746004a-7ef0-49b8-8f4b-4388c97f1b03" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/model/Categoria.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/model/EstadoItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/model/EstadoPedido.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/model/ItemCardapio.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/model/ItemPedido.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/model/Pedido.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/RestaurantePU.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V01__create_schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/repository/CategoriaRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/repository/ItemCardapioRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/repository/ItemPedidoRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/repository/PedidoRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/service/CardapioService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/service/ItemCardapioService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/service/ItemPedidoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/service/PedidoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +40,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -71,14 +71,22 @@
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/model" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/META-INF/RestaurantePU.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/anresdev/restaurante/api/service" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="anresdev.restaurante.api.service" />
+      <recent name="anresdev.restaurante.api.repository" />
+    </key>
     <key name="ImportMappingsDialog.RecentPackages">
       <recent name="anresdev.restaurante.api.model" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Dados\Github\FlorDePimenteira\api\src\main\java\anresdev\restaurante\api\service" />
     </key>
   </component>
   <component name="RunManager">
@@ -100,11 +108,6 @@
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:restaurante@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:restaurante@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@6e5db5b" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
             </expand>
             <select />
           </treeState>
@@ -119,7 +122,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1580242583469</updated>
-      <workItem from="1580242605938" duration="10575000" />
+      <workItem from="1580242605938" duration="12452000" />
     </task>
     <servers />
   </component>
