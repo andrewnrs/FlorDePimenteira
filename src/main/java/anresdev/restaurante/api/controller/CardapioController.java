@@ -1,7 +1,7 @@
 package anresdev.restaurante.api.controller;
 
 import anresdev.restaurante.api.model.ItemCardapio;
-import anresdev.restaurante.api.service.CardapioService;
+import anresdev.restaurante.api.service.ItemCardapioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -20,31 +20,31 @@ import java.util.Optional;
 @RequestMapping(value="/cardapio", produces="application/json")
 public class CardapioController {
 
-        private final CardapioService cardapioService;
+        private final ItemCardapioService itemCardapioService;
 
         @Autowired
-        public CardapioController(CardapioService cardapioService) {
-            this.cardapioService = cardapioService;
+        public CardapioController(ItemCardapioService itemCardapioService) {
+            this.itemCardapioService = itemCardapioService;
         }
 
         @CrossOrigin
         @GetMapping
         public List<ItemCardapio> BuscaTodosItens(){
-            return cardapioService.BuscaTodos();
+            return itemCardapioService.BuscaTodos();
         }
 
         @CrossOrigin
         @GetMapping("/disponiveis")
         public List<ItemCardapio> BuscaItensDisponiveis(){
-            return cardapioService.BuscaDisponiveis();
+            return itemCardapioService.BuscaDisponiveis();
         }
 
         @CrossOrigin
         @DeleteMapping(value="{id}")
         public HttpStatus RemoveItemDoCardapio(@PathVariable Integer id){
-            cardapioService.RemoveItemDoCardapio(id);
+            itemCardapioService.RemoveItemDoCardapio(id);
             Boolean deletado = false;
-            if(cardapioService.BuscaItemDoCardapioPorId(id) == null){
+            if(itemCardapioService.BuscaItemDoCardapioPorId(id) == null){
                 deletado = true;
             }
             HttpStatus responseStatus = deletado ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND;
@@ -55,7 +55,7 @@ public class CardapioController {
         @GetMapping(value="{id}")
         public Optional<ItemCardapio> getPedidoPorId(@PathVariable Integer id){
 
-            Optional<ItemCardapio> item = cardapioService.BuscaItemDoCardapioPorId(id);
+            Optional<ItemCardapio> item = itemCardapioService.BuscaItemDoCardapioPorId(id);
 
             if(item.isPresent()) {
                 return item;
@@ -68,7 +68,7 @@ public class CardapioController {
         @PostMapping
         public ResponseEntity<?> adiciona(@Validated @RequestBody ItemCardapio item, HttpServletResponse response) {
 
-            ItemCardapio itemSalvo = cardapioService.CadastraItemNoCardapio(item );
+            ItemCardapio itemSalvo = itemCardapioService.CadastraItemNoCardapio(item );
 
             URI uri = ServletUriComponentsBuilder
                     .fromCurrentRequestUri()
@@ -80,5 +80,9 @@ public class CardapioController {
                     .body(itemSalvo );
         }
 
-
+        @PutMapping("/{id}")
+        public ResponseEntity<?> atualiza(@PathVariable Integer id, @Validated @RequestBody ItemCardapio item ) {
+            ItemCardapio itemManager = itemCardapioService.atualiza(id, item );
+            return ResponseEntity.ok(itemManager );
+        }
 }
