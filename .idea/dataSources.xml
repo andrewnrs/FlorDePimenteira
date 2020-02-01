@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="restaurante@localhost" uuid="d888f90d-5583-4dfa-a681-b265ab3ada47">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/restaurante</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="META-INF:RestaurantePU.xml/Hibernate" uuid="632f8f70-4e0c-496b-8a10-329db655221b">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+D:/Dados/Github/FlorDePimenteira/src/main/resources/META-INF/RestaurantePU.xml</remarks>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/restaurante</jdbc-url>
+    </data-source>
+  </component>
+</project>
