@@ -65,15 +65,8 @@ public class CardapioController {
             }
         }
 
-        @CrossOrigin
-        @PostMapping(value = "/cadastro", consumes = "application/json", produces = "application/json")
-        public void TodosOsPedidos(@RequestBody ItemCardapio item){
-             cardapioService.CadastraItemNoCardapio(item);
-
-        }
-
         @PostMapping
-        public ResponseEntity<?> cria(@Validated @RequestBody ItemCardapio item, HttpServletResponse response) {
+        public ResponseEntity<?> adiciona(@Validated @RequestBody ItemCardapio item, HttpServletResponse response) {
 
             ItemCardapio itemSalvo = cardapioService.CadastraItemNoCardapio(item );
 
@@ -86,5 +79,6 @@ public class CardapioController {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(itemSalvo );
         }
+
 
 }

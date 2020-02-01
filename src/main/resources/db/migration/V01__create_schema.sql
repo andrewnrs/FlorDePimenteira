@@ -1,9 +1,3 @@
--- MySQL Workbench Forward Engineering
-
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
 -- -----------------------------------------------------
 -- Schema restaurante
 -- -----------------------------------------------------
@@ -20,7 +14,6 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4;
 
-
 -- -----------------------------------------------------
 -- Table `item_cardapio`
 -- -----------------------------------------------------
@@ -36,12 +29,11 @@ CREATE TABLE IF NOT EXISTS `item_cardapio` (
     FOREIGN KEY (`categoria_id`)
     REFERENCES `categoria` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb4;
 
 CREATE INDEX `fk_item_cardapio_categoria1_idx` ON `item_cardapio` (`categoria_id` ASC) VISIBLE;
 
-set @@global.time_zone  = '-3:00';
 -- -----------------------------------------------------
 -- Table `pedido`
 -- -----------------------------------------------------
@@ -56,7 +48,6 @@ CREATE TABLE IF NOT EXISTS `pedido` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4;
-
 
 -- -----------------------------------------------------
 -- Table `item_pedido`
@@ -84,8 +75,3 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE INDEX `fk_item_pedido1_idx` ON `item_pedido` (`pedido_id` ASC) VISIBLE;
 
 CREATE INDEX `fk_item_pedido_item_cardapio1_idx` ON `item_pedido` (`item_cardapio_id` ASC) VISIBLE;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
