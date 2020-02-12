@@ -10,9 +10,11 @@ public class ItemPedido {
     private Integer id;
     private Integer qtd;
     private BigDecimal valorUnit;
-    private EstadoItem estado;
+    //private EstadoItem estado;
+    private String estado;
     private Timestamp dataPedido;
     private Timestamp dataEntregue;
+    private Pedido pedido;
     private ItemCardapio itemCardapio;
 
     @Id
@@ -26,8 +28,8 @@ public class ItemPedido {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "qtd", nullable = false)
+    //@Basic
+    @Column(name = "qtd", nullable = false, columnDefinition = "INT NOT NULL")
     public Integer getQtd() {
         return qtd;
     }
@@ -36,8 +38,8 @@ public class ItemPedido {
         this.qtd = qtd;
     }
 
-    @Basic
-    @Column(name = "valor_unit", nullable = true, precision = 2)
+    //@Basic
+    @Column(name = "valor_unit", nullable = true, precision = 2, columnDefinition = " DECIMAL(10,2) DEFAULT NULL")
     public BigDecimal getValorUnit() {
         return valorUnit;
     }
@@ -46,18 +48,18 @@ public class ItemPedido {
         this.valorUnit = valorUnit;
     }
 
-    @Basic
-    @Column(name = "estado", nullable = true, length = 15)
-    public EstadoItem getEstado() {
+    //@Basic
+    @Column(name = "estado", nullable = true, length = 15, columnDefinition = "ENUM('AGUARDANDO', 'EM_PREPARO', 'PRONTO', 'ENTREGUE', 'CANCELADO') NULL DEFAULT 'AGUARDANDO'")
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadoItem estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    @Basic
-    @Column(name = "data_pedido", nullable = true)
+    //@Basic
+    @Column(name = "data_pedido", nullable = true, columnDefinition = "DATETIME NULL DEFAULT CURRENT_TIMESTAMP")
     public Timestamp getDataPedido() {
         return dataPedido;
     }
@@ -66,8 +68,8 @@ public class ItemPedido {
         this.dataPedido = dataPedido;
     }
 
-    @Basic
-    @Column(name = "data_entregue", nullable = true)
+    //@Basic
+    @Column(name = "data_entregue", nullable = true, columnDefinition = "DATETIME NULL DEFAULT NULL")
     public Timestamp getDataEntregue() {
         return dataEntregue;
     }
@@ -105,6 +107,16 @@ public class ItemPedido {
     }
 
     @ManyToOne
+    @JoinColumn(name = "pedido_id", referencedColumnName = "id", nullable = false)
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    @ManyToOne
     @JoinColumn(name = "item_cardapio_id", referencedColumnName = "id", nullable = false)
     public ItemCardapio getItemCardapio() {
         return itemCardapio;
@@ -113,4 +125,5 @@ public class ItemPedido {
     public void setItemCardapio(ItemCardapio itemCardapio) {
         this.itemCardapio = itemCardapio;
     }
+
 }

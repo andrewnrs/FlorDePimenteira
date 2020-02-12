@@ -1,10 +1,3 @@
-
-DROP VIEW IF EXISTS `valor_total_do_pedido`;
-
-DROP VIEW IF EXISTS `valor_total_por_item_do_pedido`;
-
-DROP VIEW IF EXISTS `itens_vendidos_hoje`;
-
 CREATE VIEW `valor_total_do_pedido` AS
     SELECT 
         SUM((`item_pedido`.`valor_unit` * `item_pedido`.`qtd`)) AS `total`,

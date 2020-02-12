@@ -1,11 +1,3 @@
-
-DROP TRIGGER IF EXISTS `restaurante`.`Inicializa_Conta_Valor_Total` ;
-
-DROP TRIGGER IF EXISTS `restaurante`.`Estabelece_Valor`;
-
-DROP TRIGGER IF EXISTS `restaurante`.`Atualiza_Horario_Entregue`;
-
-
 DELIMITER //
 CREATE TRIGGER `restaurante`.`Estabelece_Valor`
   BEFORE INSERT ON `restaurante`.item_pedido

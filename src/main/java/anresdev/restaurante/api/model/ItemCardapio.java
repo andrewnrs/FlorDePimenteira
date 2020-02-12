@@ -25,7 +25,7 @@ public class ItemCardapio {
     }
 
     @Basic
-    @Column(name = "valor_vigente", nullable = false, precision = 2)
+    @Column(name = "valor_vigente", nullable = false, precision = 2, columnDefinition = "DECIMAL(10,2) NOT NULL")
     public BigDecimal getValorVigente() {
         return valorVigente;
     }
@@ -35,7 +35,7 @@ public class ItemCardapio {
     }
 
     @Basic
-    @Column(name = "nome", nullable = false, length = 145)
+    @Column(name = "nome", nullable = false, length = 145, columnDefinition = "VARCHAR(145) NOT NULL")
     public String getNome() {
         return nome;
     }
@@ -45,7 +45,7 @@ public class ItemCardapio {
     }
 
     @Basic
-    @Column(name = "descricao", nullable = true, length = 145)
+    @Column(name = "descricao", nullable = true, length = 145, columnDefinition = "VARCHAR(145) NULL DEFAULT NULL")
     public String getDescricao() {
         return descricao;
     }
@@ -55,7 +55,7 @@ public class ItemCardapio {
     }
 
     @Basic
-    @Column(name = "disponivel", nullable = true)
+    @Column(name = "disponivel", nullable = true, columnDefinition = "TINYINT DEFAULT 1")
     public Boolean getDisponivel() {
         return disponivel;
     }

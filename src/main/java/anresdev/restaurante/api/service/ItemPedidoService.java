@@ -1,8 +1,10 @@
 package anresdev.restaurante.api.service;
 
+import anresdev.restaurante.api.model.ItemCardapio;
 import anresdev.restaurante.api.model.ItemPedido;
 import anresdev.restaurante.api.repository.ItemPedidoRepository;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,18 +27,41 @@ public class ItemPedidoService {
     }
 
     @Transactional
-    public void SalvaPedido(@NotNull ItemPedido ItemPedido){
-        itemPedidoRepository.save(ItemPedido);
+    public ItemPedido buscaPor(@NotNull Integer id) {
+        return itemPedidoRepository.findById(id).get();
     }
 
     @Transactional
-    public void ExcluiPedido(@NotNull ItemPedido ItemPedido){
-        itemPedidoRepository.delete(ItemPedido);
+    public List<ItemPedido> BuscaItensDoPedido(@NotNull Integer idPedido) {
+        return itemPedidoRepository.findAllByPedidoId(idPedido);
     }
 
     @Transactional
-    public void BuscaPedidoPorId(@NotNull Integer itemPedidoId){
+    public ItemPedido CadastraItem(@NotNull ItemPedido itemPedido){
+        return itemPedidoRepository.save(itemPedido);
+    }
+
+    @Transactional
+    public void ExcluiItemPedido(@NotNull ItemPedido itemPedido){
+        itemPedidoRepository.delete(itemPedido);
+    }
+
+    @Transactional
+    public void ExcluiItemPedido(@NotNull Integer itemPedidoId){
+        itemPedidoRepository.deleteById(itemPedidoId);
+    }
+
+    @Transactional
+    public void BuscaItemPedidoPorId(@NotNull Integer itemPedidoId){
         itemPedidoRepository.findById(itemPedidoId);
     }
 
+    @Transactional
+    public ItemPedido atualiza(Integer id, ItemPedido itemPedido) {
+
+        ItemPedido itemPedidoSalvo = this.buscaPor(id);
+        BeanUtils.copyProperties(itemPedido, itemPedidoSalvo, "id");
+
+        return itemPedidoSalvo;
+    }
 }

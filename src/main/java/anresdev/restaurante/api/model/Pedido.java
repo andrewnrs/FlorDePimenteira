@@ -9,7 +9,8 @@ public class Pedido {
     private Integer id;
     private BigDecimal total;
     private Integer mesa;
-    private EstadoPedido estado;
+    //private EstadoPedido estado;
+    private String estado;
     private Timestamp dataPedido;
     private String obs;
 
@@ -24,8 +25,8 @@ public class Pedido {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "total", nullable = true, precision = 2)
+    //@Basic
+    @Column(name = "total", nullable = true, precision = 2, columnDefinition = "DECIMAL(10,2) DEFAULT '0.00'")
     public BigDecimal getTotal() {
         return total;
     }
@@ -34,8 +35,8 @@ public class Pedido {
         this.total = total;
     }
 
-    @Basic
-    @Column(name = "mesa", nullable = true)
+    //@Basic
+    @Column(name = "mesa", nullable = true, columnDefinition = "INT DEFAULT '0'")
     public Integer getMesa() {
         return mesa;
     }
@@ -44,18 +45,18 @@ public class Pedido {
         this.mesa = mesa;
     }
 
-    @Basic
-    @Column(name = "estado", nullable = true, length = 15)
-    public EstadoPedido getEstado() {
+    //@Basic
+    @Column(name = "estado", nullable = true, length = 15, columnDefinition = "ENUM('ABERTO', 'AGUARDANDO', 'FECHADO', 'CANCELADO') DEFAULT 'ABERTO'")
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadoPedido estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    @Basic
-    @Column(name = "data_pedido", nullable = true)
+    //@Basic
+    @Column(name = "data_pedido", nullable = true, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     public Timestamp getDataPedido() {
         return dataPedido;
     }
@@ -64,8 +65,8 @@ public class Pedido {
         this.dataPedido = dataPedido;
     }
 
-    @Basic
-    @Column(name = "obs", nullable = true, length = 80)
+    //@Basic
+    @Column(name = "obs", nullable = true, length = 80, columnDefinition = "VARCHAR(80) NULL DEFAULT NULL")
     public String getObs() {
         return obs;
     }
