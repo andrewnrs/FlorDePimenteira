@@ -60,4 +60,8 @@ public class PedidoService {
 
         return pedidoSalvo;
     }
+
+    public List<Pedido> BuscaTodosAbertos() {
+        return pedidoRepository.findAllByEstadoAberto("aberto");
+    }
 }

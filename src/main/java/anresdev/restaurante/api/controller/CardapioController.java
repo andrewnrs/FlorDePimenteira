@@ -16,8 +16,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-//@ExposesResourceFor(ItemCardapio.class)
-@RequestMapping(value="/cardapio", produces="application/json")
+@RequestMapping("/cardapio")
 public class CardapioController {
 
         private final ItemCardapioService itemCardapioService;
@@ -40,7 +39,7 @@ public class CardapioController {
         }
 
         @CrossOrigin
-        @DeleteMapping(value="{id}")
+        @DeleteMapping("{id}")
         public HttpStatus RemoveItemDoCardapio(@PathVariable Integer id){
             itemCardapioService.RemoveItemDoCardapio(id);
             Boolean deletado = false;
@@ -52,7 +51,7 @@ public class CardapioController {
         }
 
         @CrossOrigin
-        @GetMapping(value="{id}")
+        @GetMapping("{id}")
         public Optional<ItemCardapio> getPedidoPorId(@PathVariable Integer id){
 
             Optional<ItemCardapio> item = itemCardapioService.BuscaItemDoCardapioPorId(id);
@@ -66,15 +65,9 @@ public class CardapioController {
         }
 
         @PostMapping
-        public ResponseEntity<?> adiciona(@Validated @RequestBody ItemCardapio item, HttpServletResponse response) {
+        public ResponseEntity<?> adiciona(@Validated @RequestBody ItemCardapio item) {
 
             ItemCardapio itemSalvo = itemCardapioService.CadastraItemNoCardapio(item );
-
-            URI uri = ServletUriComponentsBuilder
-                    .fromCurrentRequestUri()
-                    .path("/{id}")
-                    .buildAndExpand(itemSalvo.getId())
-                    .toUri();
 
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(itemSalvo );

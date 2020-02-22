@@ -10,13 +10,6 @@
       <mapping class="anresdev.restaurante.api.model.ItemCardapio"/>
       <mapping class="anresdev.restaurante.api.model.ItemPedido"/>
       <mapping class="anresdev.restaurante.api.model.Pedido"/>
-      <mapping class="anresdev.restaurante.api.model2.Categoria"/>
-      <mapping class="anresdev.restaurante.api.model2.ItemCardapio"/>
-      <mapping class="anresdev.restaurante.api.model2.ItemPedido"/>
-      <mapping class="anresdev.restaurante.api.model2.Pedido"/>
-      <mapping class="anresdev.restaurante.api.model2.ItensVendidosHoje"/>
-      <mapping class="anresdev.restaurante.api.model2.ValorTotalDoPedido"/>
-      <mapping class="anresdev.restaurante.api.model2.ValorTotalPorItemDoPedido"/>
       <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->
 

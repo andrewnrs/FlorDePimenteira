@@ -19,8 +19,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-//@ExposesResourceFor(Pedido.class)
-@RequestMapping(value="/pedido")
+@RequestMapping("/pedidos")
 public class PedidoController {
 
     private final PedidoService pedidoService;
@@ -34,46 +33,20 @@ public class PedidoController {
 
     @CrossOrigin
     @GetMapping
-    public List<Pedido> Todos(){
+    public List<Pedido> TodosPedidos(){
         return pedidoService.BuscaTodos();
     }
 
-//    @CrossOrigin
-//    @GetMapping("/abertos")
-//    public List<Pedido> TodosOsPedidosEmAberto(){
-//        return pedidoService.BuscaTodosAbertos();
-//    }
-
     @CrossOrigin
-    @GetMapping(value="/{idPedido}/itens")
-    public List<ItemPedido> TodosItensDoPedido(@PathVariable Integer idPedido){
-        return itemPedidoService.BuscaItensDoPedido(idPedido);
-    }
+    @GetMapping("/abertos")
+    public List<Pedido> TodosOsPedidosEmAberto(){
 
-    @CrossOrigin
-    @DeleteMapping(value="/{idPedido}")
-    public HttpStatus RemoverPedido(@PathVariable Integer idPedido){
-        pedidoService.ExcluiPedido(idPedido);
-        Boolean deletado = false;
-        if(pedidoService.buscaPor(idPedido) == null){
-            deletado = true;
-        }
-        HttpStatus responseStatus = deletado ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND;
-        return responseStatus;
-    }
-
-    @CrossOrigin
-    @DeleteMapping(value="/{idPedido}/itens/{idItem}")
-    public List<ItemPedido> RemoverItemDoPedido(@PathVariable Integer idPedido, @PathVariable Integer idItem){
-
-        itemPedidoService.ExcluiItemPedido(idItem);
-
-        return itemPedidoService.BuscaItensDoPedido(idPedido);
+        return pedidoService.BuscaTodosAbertos();
     }
 
     @CrossOrigin
     @GetMapping("/{idPedido}")
-    public Optional<Pedido> getPedidoPorId(@PathVariable Integer idPedido){
+    public Optional<Pedido> BuscaPedidoPorId(@PathVariable Integer idPedido){
 
         Optional<Pedido> item = pedidoService.BuscaPedidoPorId(idPedido);
 
@@ -86,46 +59,92 @@ public class PedidoController {
     }
 
     @CrossOrigin
+    @GetMapping("/{idPedido}/itens")
+    public List<ItemPedido> TodosItensDoPedido(@PathVariable Integer idPedido){
+        return itemPedidoService.BuscaItensDoPedido(idPedido);
+    }
+
+    @PutMapping("/{idPedido}")
+    public ResponseEntity<?> AtualizaPedido(@PathVariable Integer idPedido, @Validated @RequestBody Pedido pedido ) {
+        Pedido pedidoManager = pedidoService.atualiza(idPedido, pedido );
+        return ResponseEntity.ok(pedidoManager );
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/{idPedido}")
+    public HttpStatus RemoverPedido(@PathVariable Integer idPedido){
+        //busacr todos itens
+        List<ItemPedido> itens = itemPedidoService.BuscaItensDoPedido(idPedido);
+
+        //deletar todos os itens
+        for (ItemPedido item: itens ) {
+            itemPedidoService.ExcluiItemPedido(item);
+        }
+        //deletar o pedido
+
+        pedidoService.ExcluiPedido(idPedido);
+        Boolean deletado = false;
+        if(pedidoService.buscaPor(idPedido) == null){
+            deletado = true;
+        }
+        HttpStatus responseStatus = deletado ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND;
+        return responseStatus;
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/{idPedido}/itens/{idItem}")
+    public List<ItemPedido> RemoverItemDoPedido(@PathVariable Integer idPedido, @PathVariable Integer idItem){
+
+        itemPedidoService.ExcluiItemPedido(idItem);
+
+        return itemPedidoService.BuscaItensDoPedido(idPedido);
+    }
+
+    @CrossOrigin
     @PostMapping
-    public ResponseEntity<?> novoPedido(@Validated @RequestBody Pedido pedido, HttpServletResponse response) {
+    public ResponseEntity<?> CadastraNovoPedido(@Validated @RequestBody Pedido pedido) {
 
         Pedido pedidoSalvo = pedidoService.CadastraPedido(pedido );
-
-        URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequestUri()
-                .path("/{id}")
-                .buildAndExpand(pedidoSalvo.getId())
-                .toUri();
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(pedidoSalvo );
     }
 
     @CrossOrigin
+    @GetMapping("/itens")
+    public List<ItemPedido> BuscaTodosItens(){
+        return itemPedidoService.BuscaTodos();
+    }
+
+    @CrossOrigin
+    @GetMapping("/itens/{idItem}")
+    public Optional<ItemPedido> BuscaItemPorId(@PathVariable Integer idItem) {
+
+        Optional<ItemPedido> item = itemPedidoService.buscaItemPedidoPor(idItem );
+
+        if(item.isPresent()) {
+            return item;
+        }
+        else {
+            return null;
+        }
+    }
+
+    @CrossOrigin
     @PostMapping("/itens")
-    public ResponseEntity<?> adicionaItem(@Validated @RequestBody ItemPedido item, HttpServletResponse response) {
+    public ResponseEntity<?> SalvaItem(@Validated @RequestBody ItemPedido item) {
 
         ItemPedido itemSalvo = itemPedidoService.CadastraItem(item );
-
-        URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequestUri()
-                .path("/{id}")
-                .buildAndExpand(itemSalvo.getId())
-                .toUri();
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(itemSalvo );
     }
 
-    @PutMapping("/{idPedido}")
-    public ResponseEntity<?> atualizaPedido(@PathVariable Integer idPedido, @Validated @RequestBody Pedido pedido ) {
-        Pedido pedidoManager = pedidoService.atualiza(idPedido, pedido );
-        return ResponseEntity.ok(pedidoManager );
-    }
-
     @PutMapping("/itens/{idItem}")
-    public ResponseEntity<?> atualizaItem(@PathVariable Integer idItem, @Validated @RequestBody ItemPedido itemPedido ) {
+    public ResponseEntity<?> AtualizaItem(@PathVariable Integer idItem, @Validated @RequestBody ItemPedido itemPedido ) {
         ItemPedido itemManager = itemPedidoService.atualiza(idItem, itemPedido );
         return ResponseEntity.ok(itemManager );
     }
+
+
 }
